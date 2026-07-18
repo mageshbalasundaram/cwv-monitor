@@ -4,6 +4,7 @@ import ScoreGauge from "../components/ScoreGauge";
 import MetricCard from "../components/MetricCard";
 import SuggestionList from "../components/SuggestionList";
 import URLInput from "../components/URLInput";
+import { saveAudit } from "../lib/firebase";
 
 type AuditResult = {
     score: number
@@ -27,6 +28,7 @@ export default function Home() {
         try {
             const data = await fetchPageSpeed(url, strategy);
             setResult(data);
+            await saveAudit(data);
         }
         catch (err) {
 
