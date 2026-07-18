@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { fetchPageSpeed } from "../lib/pagespeed";
 import ScoreGauge from "../components/ScoreGauge";
+import MetricCard from "../components/MetricCard";
 
 type AuditResult = {
     score: number
@@ -49,6 +50,19 @@ export default function Home() {
                     <>
 
                         <ScoreGauge score={result.score} />
+
+                        <div className="flex gap-2 flex-wrap">
+                            {result.metrics.map((metric) => (
+                                <MetricCard 
+                                key={metric.label}
+                                label={metric.label}
+                                value={metric.value}
+                                category={metric.category}
+                                />
+
+                            ))}
+
+                        </div>
 
                         <pre>{JSON.stringify(result, null, 2)}</pre>
                     </>
