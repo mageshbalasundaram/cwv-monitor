@@ -2,6 +2,7 @@ import { useState } from "react";
 import { fetchPageSpeed } from "../lib/pagespeed";
 import ScoreGauge from "../components/ScoreGauge";
 import MetricCard from "../components/MetricCard";
+import SuggestionList from "../components/SuggestionList";
 
 type AuditResult = {
     score: number
@@ -38,7 +39,7 @@ export default function Home() {
 
     }
     return (
-        <div>
+        <div className=" p-5 flex  flex-col gap-5">
             <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" onClick={() => handleAudit("https://alldigitech.com", "desktop")}> Audit</button>
 
             {loading && <p>Loading....</p>}
@@ -48,9 +49,9 @@ export default function Home() {
 
                 (
                     <>
-
+                    <h2 className="text-2xl font-bold">Overall Score</h2>
                         <ScoreGauge score={result.score} />
-
+                        <h2 className="text-2xl font-bold">Metrics</h2>
                         <div className="flex gap-2 flex-wrap">
                             {result.metrics.map((metric) => (
                                 <MetricCard 
@@ -63,8 +64,9 @@ export default function Home() {
                             ))}
 
                         </div>
+                        <SuggestionList suggestions={result.suggestions}/>
 
-                        <pre>{JSON.stringify(result, null, 2)}</pre>
+                       
                     </>
 
                 )}
