@@ -1,13 +1,14 @@
 
-import {fetchPageSpeed} from "./lib/pagespeed"
+// import {fetchPageSpeed} from "./lib/pagespeed"
+import Home from "./Pages/Home"
 
 const App = () => {
 
-  fetchPageSpeed("https://alldigitech.com", "mobile")
+  // fetchPageSpeed("https://alldigitech.com", "mobile")
   return (
     <div>
 
-      <h1>Testing....</h1>
+      <Home/>
 
      
     </div>
