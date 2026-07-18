@@ -3,6 +3,7 @@ import { fetchPageSpeed } from "../lib/pagespeed";
 import ScoreGauge from "../components/ScoreGauge";
 import MetricCard from "../components/MetricCard";
 import SuggestionList from "../components/SuggestionList";
+import URLInput from "../components/URLInput";
 
 type AuditResult = {
     score: number
@@ -40,9 +41,9 @@ export default function Home() {
     }
     return (
         <div className=" p-5 flex  flex-col gap-5">
-            <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" onClick={() => handleAudit("https://alldigitech.com", "desktop")}> Audit</button>
 
-            {loading && <p>Loading....</p>}
+            <URLInput onSubmit={handleAudit}/>
+             {loading && <p>Loading....</p>}
             {error && <p>{error}</p>}
 
             {result &&
