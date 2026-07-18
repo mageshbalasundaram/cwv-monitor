@@ -1,5 +1,5 @@
 import { initializeApp } from "firebase/app"
-import { addDoc, collection, getFirestore } from "firebase/firestore"
+import { addDoc, collection, getDocs, getFirestore, orderBy, query } from "firebase/firestore"
 
 const firebaseConfig = {
   apiKey:            import.meta.env.VITE_FIREBASE_API_KEY,
@@ -21,4 +21,15 @@ export async function saveAudit(data: object){
         savedAt: new Date().toISOString()
     })
 
+}
+
+export async function getAudits() {
+    const q = query(collection(db, "audits"), orderBy("savedAt", "desc"))
+    const snapshot = await getDocs(q)
+
+    return snapshot.docs.map((doc) => ({
+        id:doc.id,
+        ...doc.data()
+    }))
+    
 }
