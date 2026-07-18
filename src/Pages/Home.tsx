@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { fetchPageSpeed } from "../lib/pagespeed";
+import ScoreGauge from "../components/ScoreGauge";
 
 type AuditResult = {
     score: number
@@ -37,12 +38,22 @@ export default function Home() {
     }
     return (
         <div>
-            <button onClick={() => handleAudit("https://alldigitech.com", "desktop")}> Audit</button>
+            <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" onClick={() => handleAudit("https://alldigitech.com", "desktop")}> Audit</button>
 
             {loading && <p>Loading....</p>}
             {error && <p>{error}</p>}
-            
-            {result && <pre>{JSON.stringify(result, null, 2)}</pre>}
+
+            {result &&
+
+                (
+                    <>
+
+                        <ScoreGauge score={result.score} />
+
+                        <pre>{JSON.stringify(result, null, 2)}</pre>
+                    </>
+
+                )}
 
         </div>
     )
