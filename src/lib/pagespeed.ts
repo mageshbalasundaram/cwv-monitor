@@ -44,7 +44,7 @@ export async function fetchPageSpeed(url: string, strategy: string) {
 
 
 
-    return {score, metrics, suggestions};
+    return {url, strategy, score, metrics, suggestions};
 
     }catch (err) {
         if( err instanceof Error){

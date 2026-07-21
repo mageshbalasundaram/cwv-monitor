@@ -8,6 +8,8 @@ import { saveAudit } from "../lib/firebase";
 
 type AuditResult = {
     score: number
+    url: string
+    strategy: string
     metrics: { label: string; value: string; category: string }[]
     suggestions: { title: string; value: string; score: number }[]
 }
@@ -42,38 +44,43 @@ export default function Home() {
 
     }
     return (
-        <div className=" p-5 flex  flex-col gap-5">
+        <div className=" p-5 flex  flex-col gap-5 justify-center items-center ">
+            <div className=" flex flex-col gap-5 max-w-250 w-full">
 
-            <URLInput onSubmit={handleAudit}/>
-             {loading && <p>Loading....</p>}
-            {error && <p>{error}</p>}
+                <URLInput onSubmit={handleAudit} showStrategyButtons={!!result} />
+                {loading &&
 
-            {result &&
+                    <div className="flex justify-center items-center">
+                        <div className="w-8 h-8 border-4 border-blue-500 border-t-transparent rounded-full animate-spin"></div>
+                    </div>}
+                {error && <p>{error}</p>}
 
-                (
-                    <>
-                    <h2 className="text-2xl font-bold">Overall Score</h2>
-                        <ScoreGauge score={result.score} />
-                        <h2 className="text-2xl font-bold">Metrics</h2>
-                        <div className="flex gap-2 flex-wrap">
-                            {result.metrics.map((metric) => (
-                                <MetricCard 
-                                key={metric.label}
-                                label={metric.label}
-                                value={metric.value}
-                                category={metric.category}
-                                />
+                {result &&
 
-                            ))}
+                    (
+                        <>
+                            <h2 className="text-2xl font-bold">Overall Score</h2>
+                            <ScoreGauge score={result.score} />
+                            <h2 className="text-2xl font-bold">Metrics</h2>
+                            <div className="flex gap-2 flex-wrap">
+                                {result.metrics.map((metric) => (
+                                    <MetricCard
+                                        key={metric.label}
+                                        label={metric.label}
+                                        value={metric.value}
+                                        category={metric.category}
+                                    />
 
-                        </div>
-                        <SuggestionList suggestions={result.suggestions}/>
+                                ))}
 
-                       
-                    </>
+                            </div>
+                            <SuggestionList suggestions={result.suggestions} />
 
-                )}
 
+                        </>
+
+                    )}
+            </div>
         </div>
     )
 }

@@ -11,10 +11,15 @@ const App = () => {
 
     <BrowserRouter>
 
-    <nav>
-      
-      <Link to="/">Home</Link>
+    <nav className="flex justify-between border-b-2 border-gray-200 p-4 ">
+      <div className="text-2xl text-blue-800 font-semibold">
+        CWV Monitor 
+      </div>
+      <div className="text-blue-600 font-medium flex gap-2.5">
+         <Link to="/">Home</Link>
       <Link to="/history"> History</Link>
+      </div>
+     
     </nav>
 
     <Routes>
